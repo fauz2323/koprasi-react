@@ -3,12 +3,14 @@ import Logo from "../assets/images/icon.jpeg";
 import { useState } from "react";
 import TextInputPart from "../parts/TextInputPart";
 import axios from "axios";
+import TextButtonPart from "../parts/TextButtonPart";
+import ButtonPart from "../parts/ButtonPart";
 
 export default function Login() {
   //state
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -19,21 +21,18 @@ export default function Login() {
     });
   };
 
-  const loginRequest = async (email, password) => {
+  const loginRequest = async (username, password) => {
     //axios
     setLoading(true);
     axios
       .post(
-        "/user",
+        "https://indomuliasejahtera.com/api/login",
         {
-          email: email,
+          username: username,
           password: password,
         },
         {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
+          headers: {},
         }
       )
       .then(function (response) {
@@ -43,7 +42,6 @@ export default function Login() {
       })
       .catch(function (error) {
         setLoading(false);
-
         console.log(error);
       });
   };
@@ -66,12 +64,12 @@ export default function Login() {
         </h4>
 
         <TextInputPart
-          name={"email"}
-          type={"email"}
-          autoComplete={"email"}
-          value={form.email}
+          name={"username"}
+          type={"username"}
+          autoComplete={"username"}
+          value={form.username}
           onChange={handleChange}
-          id={"email"}
+          id={"username"}
         />
 
         <TextInputPart
@@ -83,20 +81,13 @@ export default function Login() {
           id={"password"}
         />
 
-        <div className="sm:col-span-4 mt-8">
-          <Link to="/forgot" className="grid justify-items-end text-sky-600">
-            Forgot Password ?
-          </Link>
-        </div>
-        <div className="sm:col-span-4 mt-8">
-          <button
-            className="bg-sky-600 text-white py-2 px-4 block w-full rounded-xl text-center hover:bg-sky-700"
-            onClick={loginRequest}
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Login"}
-          </button>
-        </div>
+        <TextButtonPart
+          toLink={"/forgot"}
+          title={"Forgot Password ?"}
+          className={"grid justify-items-end text-sky-600"}
+        />
+
+        <ButtonPart onClick={loginRequest} disabled={loading} />
         <div className="sm:col-span-4 mt-8">
           <h4 className="grid justify-items-center">
             Don't have an account ?<Link to={"/register"}> Register</Link>
