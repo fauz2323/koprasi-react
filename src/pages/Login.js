@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
-import Logo from "../assets/images/icon.jpeg";
-import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { icon } from "../assets/images/index";
+import { useState, useEffect } from "react";
 import TextInputPart from "../parts/TextInputPart";
-import axios from "axios";
 import TextButtonPart from "../parts/TextButtonPart";
 import ButtonPart from "../parts/ButtonPart";
+import AuthFetch from "../helper/fetch/AuthFetch";
+import ErrorComponent from "../component/ErrorComponent";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Login() {
   //state
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -21,44 +25,42 @@ export default function Login() {
     });
   };
 
-  const loginRequest = async (username, password) => {
+  useEffect(() => {
+    const data = secureLocalStorage.getItem("token");
+    if (data !== null) {
+      setIsLogin(true);
+    }
+  }, []);
+
+  const login = async (username, password) => {
     //axios
     setLoading(true);
-    axios
-      .post(
-        "https://indomuliasejahtera.com/api/login",
-        {
-          username: username,
-          password: password,
-        },
-        {
-          headers: {},
-        }
-      )
-      .then(function (response) {
-        setLoading(false);
-
-        console.log(response);
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.log(error);
-      });
+    AuthFetch.loginRequest({ username, password }, (data) => {
+      setLoading(false);
+      if (data.status === 200) {
+        setIsLogin(true);
+      } else {
+        setError(data.message);
+      }
+    });
   };
 
   return (
     <div className="flex justify-center space-y-12">
+      {isLogin && <Navigate to="/home" replace />}
+
       <div className="flex flex-col">
         <div className="flex justify-center">
           <img
             className="rounded-lg m-8"
-            src={Logo}
+            src={icon}
             alt="Logo"
             width={100}
             height={100}
           />
         </div>
-        <h2 className="font-bold">User Login</h2>
+        {error && <ErrorComponent errorMessage={error} />}
+        <h2 className="font-bold mt-4">User Login</h2>
         <h4 className="font-light">
           Welcome back. Enter your credentials to access your account
         </h4>
@@ -87,7 +89,10 @@ export default function Login() {
           className={"grid justify-items-end text-sky-600"}
         />
 
-        <ButtonPart onClick={loginRequest} disabled={loading} />
+        <ButtonPart
+          onClick={() => login(form.username, form.password)}
+          disabled={loading}
+        />
         <div className="sm:col-span-4 mt-8">
           <h4 className="grid justify-items-center">
             Don't have an account ?<Link to={"/register"}> Register</Link>
