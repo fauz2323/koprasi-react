@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import ForgotPage from "./pages/ForgotPage";
 import Starter from "./pages/Starter";
 import HomePage from "./pages/HomePage";
+import { LoginProvider } from "./context";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,7 +19,11 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login />,
+      element: (
+        <LoginProvider>
+          <Login />
+        </LoginProvider>
+      ),
     },
     {
       path: "/forgot",
