@@ -1,22 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ButtomNavBar() {
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-      <div className="flex flex-row justify-center">
-        <a
-          href="/home"
-          className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100"
-        >
-          License
-        </a>
-        <a
-          href="/s"
-          className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100"
-        >
-          License
-        </a>
-      </div>
+    <div className="appBottomMenu">
+      <Link to="/home" className="item">
+        <div className="col">
+          <ion-icon name="pie-chart-outline"></ion-icon>
+          <strong>Overview</strong>
+        </div>
+      </Link>
+
+      <Link className="item" to={"/history"}>
+        <div className="col">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <strong>History</strong>
+        </div>
+      </Link>
+      <a href="app-settings.html" className="item">
+        <div className="col">
+          <ion-icon name="settings-outline"></ion-icon>
+          <strong>Settings</strong>
+        </div>
+      </a>
     </div>
   );
 }

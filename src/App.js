@@ -5,6 +5,15 @@ import Register from "./pages/Register";
 import ForgotPage from "./pages/ForgotPage";
 import Starter from "./pages/Starter";
 import HomePage from "./pages/HomePage";
+import { LoginProvider } from "./helper/context/LoginContext";
+import { HomeProvider } from "./helper/context/HomeContext";
+import SetoranPage from "./pages/SetoranPage";
+import { SetoranProvider } from "./helper/context/SetoranContext";
+import {
+  HistoryContext,
+  HistoryProvider,
+} from "./helper/context/HistoryContext";
+import HistoriesPage from "./pages/HistoriesPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,12 +22,24 @@ function App() {
       element: <Starter />,
     },
     {
+      path: "*",
+      element: <NotFound />,
+    },
+    {
       path: "/home",
-      element: <HomePage />,
+      element: (
+        <HomeProvider>
+          <HomePage />
+        </HomeProvider>
+      ),
     },
     {
       path: "/login",
-      element: <Login />,
+      element: (
+        <LoginProvider>
+          <Login />
+        </LoginProvider>
+      ),
     },
     {
       path: "/forgot",
@@ -29,8 +50,20 @@ function App() {
       element: <Register />,
     },
     {
-      path: "*",
-      element: <NotFound />,
+      path: "/setoran",
+      element: (
+        <SetoranProvider>
+          <SetoranPage />
+        </SetoranProvider>
+      ),
+    },
+    {
+      path: "/history",
+      element: (
+        <HistoryProvider>
+          <HistoriesPage />
+        </HistoryProvider>
+      ),
     },
   ]);
 

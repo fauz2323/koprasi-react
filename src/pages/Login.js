@@ -1,22 +1,29 @@
 import { Link, Navigate } from "react-router-dom";
 import { icon } from "../assets/images/index";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import TextInputPart from "../parts/TextInputPart";
 import TextButtonPart from "../parts/TextButtonPart";
 import ButtonPart from "../parts/ButtonPart";
 import AuthFetch from "../helper/fetch/AuthFetch";
 import ErrorComponent from "../component/ErrorComponent";
 import secureLocalStorage from "react-secure-storage";
+import { LoginContext } from "../helper/context/LoginContext";
 
 export default function Login() {
   //state
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-  });
+  const {
+    loading,
+    setLoading,
+    error,
+    setError,
+    isLogin,
+    setIsLogin,
+    form,
+    setForm,
+    halo,
+  } = useContext(LoginContext);
+
+  console.log(halo);
 
   const handleChange = (e) => {
     setForm({
