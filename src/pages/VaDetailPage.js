@@ -6,7 +6,8 @@ import { VaDetailContext } from "../helper/context/VaDetailContext";
 import { useContext } from "react";
 
 export default function VaDetailPage() {
-  const { transactionid, isLoading, data } = useContext(VaDetailContext);
+  const { transactionid, isLoading, data, cancelTransaction } =
+    useContext(VaDetailContext);
 
   return (
     <>
@@ -68,7 +69,12 @@ export default function VaDetailPage() {
                   <span>{FormatHelper.formatDate(data.transaction.exp)}</span>
                 </li>
                 {data.transaction.status === "pending" ? (
-                  <button class="btn btn-danger col-12 mt-4">
+                  <button
+                    onClick={() =>
+                      cancelTransaction(data.transaction.transactionid)
+                    }
+                    class="btn btn-danger col-12 mt-4"
+                  >
                     cancel Transaction
                   </button>
                 ) : (

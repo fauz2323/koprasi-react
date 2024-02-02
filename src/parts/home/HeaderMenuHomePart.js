@@ -16,7 +16,7 @@ export default function HeaderMenuHomePart() {
               </Link>
             </div>
             <div className="item">
-              <Link to={"/setoran"}>
+              <Link to={"/setoran/setoran"}>
                 <div className="icon-wrapper">
                   <ion-icon name="arrow-forward-outline"></ion-icon>
                 </div>
@@ -24,7 +24,7 @@ export default function HeaderMenuHomePart() {
               </Link>
             </div>
             <div className="item">
-              <Link to={"/transaction/va/asdasdasd"}>
+              <Link to={"/setoran/vip"}>
                 <div className="icon-wrapper bg-success">
                   <ion-icon name="card-outline"></ion-icon>
                 </div>
@@ -32,12 +32,12 @@ export default function HeaderMenuHomePart() {
               </Link>
             </div>
             <div className="item">
-              <a href="#">
+              <Link to={"/setoran/happy"}>
                 <div className="icon-wrapper bg-warning">
                   <ion-icon name="swap-vertical"></ion-icon>
                 </div>
                 <strong>Setoran Happy</strong>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

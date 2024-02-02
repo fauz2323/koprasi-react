@@ -54,14 +54,14 @@ export default class TransactionFetch {
       });
   };
 
-  static setoranTransaction = async (data, callback) => {
+  static setoranTransaction = async (path, data, callback) => {
     const body = {
       amount: data.amount,
       bank: data.bank,
     };
     //axios
     await axios
-      .post("https://indomuliasejahtera.com/api/transaction-request", body, {
+      .post("https://indomuliasejahtera.com/api/" + path, body, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -92,6 +92,36 @@ export default class TransactionFetch {
     //axios
     await axios
       .post("https://indomuliasejahtera.com/api/transaction-detail-id", body, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + secureLocalStorage.getItem("token"),
+        },
+      })
+      .then(function (response) {
+        callback({
+          status: response.status,
+          message: response.data.message,
+          data: response.data,
+        });
+      })
+      .catch(function (error) {
+        callback({
+          status: error.status,
+          message: error.data.message,
+          data: "",
+        });
+      });
+  };
+
+  static cancelTransaction = async (transactionid, callback) => {
+    const body = {
+      transactionid: transactionid,
+    };
+
+    //axios
+    await axios
+      .post("https://indomuliasejahtera.com/api/transaction-cancel", body, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

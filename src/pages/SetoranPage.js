@@ -15,6 +15,8 @@ export default function SetoranPage() {
     submitHanler,
     error,
     isLoading,
+    data,
+    type,
   } = useContext(SetoranContext);
 
   return (
@@ -37,7 +39,7 @@ export default function SetoranPage() {
             </div>
             <div className="listview-title ">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Pilih Jumlah Setoran
+                Pilih Jumlah Setoran {type}
               </label>
               <div className="row justify-content-center">
                 <button

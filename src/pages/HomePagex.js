@@ -17,7 +17,6 @@ export default function HomePage() {
     AuthFetch.AuthRequest((data) => {
       if (data.status === 200) {
         setLoading(false);
-        console.log(data);
       }
 
       if (data.status === 401) {

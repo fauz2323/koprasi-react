@@ -15,7 +15,6 @@ export const HistoryBonusProvider = ({ children }) => {
       if (response.status === 200) {
         setData(response.data.bonus);
         setIsLoading(false);
-        console.log(response.data.bonus);
       } else if (response.status === 401) {
         setIsLoading(false);
         secureLocalStorage.clear();

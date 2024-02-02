@@ -63,7 +63,7 @@ function App() {
       ),
     },
     {
-      path: "/setoran",
+      path: "/setoran/:type",
       element: (
         <SetoranProvider>
           <SetoranPage />

@@ -19,10 +19,8 @@ export const HistoryProvider = ({ children }) => {
           ...history,
           ...data.data.list,
         });
-        console.log(data);
       }
       if (data.status === 401) {
-        console.log("unautorize");
         secureLocalStorage.clear();
         navigate("/login");
       } else {

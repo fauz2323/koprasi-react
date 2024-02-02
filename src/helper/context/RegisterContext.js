@@ -21,7 +21,6 @@ export const RegisterProvider = ({ children }) => {
   });
 
   const handleChange = (e) => {
-    console.log("123");
     setForm({
       ...form,
       [e.target.name]: e.target.value,

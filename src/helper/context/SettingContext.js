@@ -30,7 +30,6 @@ export const SettingProvider = ({ children }) => {
       new: form.new_password,
     };
     AuthFetch.changePassword(data, (response) => {
-      console.log(response);
       if (response.status === 200) {
         setIsLoading(false);
         setForm({
@@ -52,11 +51,9 @@ export const SettingProvider = ({ children }) => {
 
   useEffect(() => {
     AuthFetch.AuthRequest((data) => {
-      console.log(data);
       if (data.status === 200) {
         setIsLoading(false);
         setData(data.data.user);
-        console.log(data.data.user);
       } else if (data.status === 401) {
         console.log("unautorize");
         secureLocalStorage.clear();

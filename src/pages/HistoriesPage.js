@@ -19,17 +19,29 @@ export default function HistoriesPage() {
           <HeaderComponents />
           <div id="appCapsule">
             <div className="p-3">
-              <div className="section-title mb-3">History Transaction</div>
+              <div className="section-title mb-3">History Transactions</div>
               <div className="transactions">
-                {Object.values(history).map((item) => (
-                  <CardHistoryPart
-                    type={item.type}
-                    va={item.va}
-                    amount={item.amount}
-                    date={item.created_at}
-                    status={item.status}
-                  />
-                ))}
+                {Object.values(history).map((item) =>
+                  item.type !== "wd" ? (
+                    <CardHistoryPart
+                      type={item.type}
+                      va={item.va}
+                      amount={item.amount}
+                      date={item.created_at}
+                      status={item.status}
+                      button={true}
+                      url={"/transaction/va/" + item.transactionid}
+                    />
+                  ) : (
+                    <CardHistoryPart
+                      type={item.type}
+                      va={item.va}
+                      amount={item.amount}
+                      date={item.created_at}
+                      status={item.status}
+                    />
+                  )
+                )}
               </div>
             </div>
           </div>
