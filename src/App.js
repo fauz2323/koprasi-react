@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import ForgotPage from "./pages/ForgotPage";
 import Starter from "./pages/Starter";
+import HistoryBonusPage from "./pages/HistoryBonusPage";
 import HomePage from "./pages/HomePage";
 import { LoginProvider } from "./helper/context/LoginContext";
 import { HomeProvider } from "./helper/context/HomeContext";
@@ -14,6 +15,14 @@ import {
   HistoryProvider,
 } from "./helper/context/HistoryContext";
 import HistoriesPage from "./pages/HistoriesPage";
+import WithdrawPage from "./pages/WithdrawPage";
+import { WithdrawProvider } from "./helper/context/WithdrawContext";
+import VaDetailPage from "./pages/VaDetailPage";
+import { VaDetailProvider } from "./helper/context/VaDetailContext";
+import { HistoryBonusProvider } from "./helper/context/HistoryBonusContext";
+import SettingPage from "./pages/SettingPage";
+import { SettingProvider } from "./helper/context/SettingContext";
+import { RegisterProvider } from "./helper/context/RegisterContext";
 
 function App() {
   const router = createBrowserRouter([
@@ -47,7 +56,11 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register />,
+      element: (
+        <RegisterProvider>
+          <Register />
+        </RegisterProvider>
+      ),
     },
     {
       path: "/setoran",
@@ -63,6 +76,38 @@ function App() {
         <HistoryProvider>
           <HistoriesPage />
         </HistoryProvider>
+      ),
+    },
+    {
+      path: "/withdraw",
+      element: (
+        <WithdrawProvider>
+          <WithdrawPage />
+        </WithdrawProvider>
+      ),
+    },
+    {
+      path: "/transaction/va/:transactionid",
+      element: (
+        <VaDetailProvider>
+          <VaDetailPage />
+        </VaDetailProvider>
+      ),
+    },
+    {
+      path: "/history/bonus",
+      element: (
+        <HistoryBonusProvider>
+          <HistoryBonusPage />
+        </HistoryBonusProvider>
+      ),
+    },
+    {
+      path: "/setting",
+      element: (
+        <SettingProvider>
+          <SettingPage />
+        </SettingProvider>
       ),
     },
   ]);

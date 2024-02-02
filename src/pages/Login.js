@@ -1,56 +1,16 @@
 import { Link, Navigate } from "react-router-dom";
 import { icon } from "../assets/images/index";
-import { useEffect, useContext } from "react";
 import TextInputPart from "../parts/TextInputPart";
 import TextButtonPart from "../parts/TextButtonPart";
 import ButtonPart from "../parts/ButtonPart";
-import AuthFetch from "../helper/fetch/AuthFetch";
 import ErrorComponent from "../component/ErrorComponent";
-import secureLocalStorage from "react-secure-storage";
 import { LoginContext } from "../helper/context/LoginContext";
+import { useContext } from "react";
 
 export default function Login() {
   //state
-  const {
-    loading,
-    setLoading,
-    error,
-    setError,
-    isLogin,
-    setIsLogin,
-    form,
-    setForm,
-    halo,
-  } = useContext(LoginContext);
-
-  console.log(halo);
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  useEffect(() => {
-    const data = secureLocalStorage.getItem("token");
-    if (data !== null) {
-      setIsLogin(true);
-    }
-  }, []);
-
-  const login = async (username, password) => {
-    //axios
-    setLoading(true);
-    AuthFetch.loginRequest({ username, password }, (data) => {
-      setLoading(false);
-      if (data.status === 200) {
-        setIsLogin(true);
-      } else {
-        setError(data.message);
-      }
-    });
-  };
+  const { loading, error, isLogin, form, login, handleChange } =
+    useContext(LoginContext);
 
   return (
     <div className="flex justify-center space-y-12">
@@ -97,6 +57,7 @@ export default function Login() {
         />
 
         <ButtonPart
+          text={"Login"}
           onClick={() => login(form.username, form.password)}
           disabled={loading}
         />

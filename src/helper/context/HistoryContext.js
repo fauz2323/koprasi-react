@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import TransactionFetch from "../fetch/TransactionFetch";
 import secureLocalStorage from "react-secure-storage";
+import { useNavigate } from "react-router-dom";
 
 export const HistoryContext = createContext({});
 
 export const HistoryProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [history, setHistory] = useState([]);
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +24,7 @@ export const HistoryProvider = ({ children }) => {
       if (data.status === 401) {
         console.log("unautorize");
         secureLocalStorage.clear();
-        setIsLogin(false);
+        navigate("/login");
       } else {
         setIsLoading(false);
       }

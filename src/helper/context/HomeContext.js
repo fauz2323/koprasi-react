@@ -30,8 +30,7 @@ export const HomeProvider = ({ children }) => {
           vip: data.data.balanceVip,
         });
         console.log(data);
-      }
-      if (data.status === 401) {
+      } else if (data.status === 401) {
         console.log("unautorize");
         secureLocalStorage.clear();
         setIsLogin(true);

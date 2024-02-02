@@ -1,6 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
+import { icon } from "../assets/images/index";
 
 export default function SideBarComponent() {
+  const handlerLogout = () => {
+    secureLocalStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
     <>
       <div
@@ -14,116 +22,59 @@ export default function SideBarComponent() {
             <div className="modal-body p-0">
               <div className="profileBox pt-2 pb-2">
                 <div className="image-wrapper">
-                  <img
-                    src="assets/img/sample/avatar/avatar1.jpg"
-                    alt="image"
-                    className="imaged  w36"
-                  />
+                  <img src={icon} alt="images" className="imaged w36" />
                 </div>
                 <div className="in">
-                  <strong>Sebastian Doe</strong>
-                  <div className="text-muted">4029209</div>
+                  <strong>Hello Koprasi User</strong>
                 </div>
                 <a
-                  href="#"
+                  href="/"
                   className="btn btn-link btn-icon sidebar-close"
                   data-bs-dismiss="modal"
                 >
                   <ion-icon name="close-outline"></ion-icon>
                 </a>
               </div>
-              <div className="sidebar-balance">
-                <div className="listview-title">Balance</div>
-                <div className="in">
-                  <h1 className="amount">$ 2,562.50</h1>
-                </div>
-              </div>
-
-              <div className="action-group">
-                <a href="index.html" className="action-button">
-                  <div className="in">
-                    <div className="iconbox">
-                      <ion-icon name="add-outline"></ion-icon>
-                    </div>
-                    Deposit
-                  </div>
-                </a>
-                <a href="index.html" className="action-button">
-                  <div className="in">
-                    <div className="iconbox">
-                      <ion-icon name="arrow-down-outline"></ion-icon>
-                    </div>
-                    Withdraw
-                  </div>
-                </a>
-                <a href="index.html" className="action-button">
-                  <div className="in">
-                    <div className="iconbox">
-                      <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </div>
-                    Send
-                  </div>
-                </a>
-                <a href="app-cards.html" className="action-button">
-                  <div className="in">
-                    <div className="iconbox">
-                      <ion-icon name="card-outline"></ion-icon>
-                    </div>
-                    My Cards
-                  </div>
-                </a>
-              </div>
 
               <div className="listview-title mt-1">Menu</div>
               <ul className="listview flush transparent no-line image-listview">
                 <li>
-                  <a href="index.html" className="item">
+                  <Link to="/home" className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="pie-chart-outline"></ion-icon>
                     </div>
-                    <div className="in">
-                      Overview
-                      <span className="badge badge-primary">10</span>
-                    </div>
-                  </a>
+                    <div className="in">Home</div>
+                  </Link>
                 </li>
                 <li>
-                  <a href="app-pages.html" className="item">
+                  <Link to="/history" className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="document-text-outline"></ion-icon>
                     </div>
-                    <div className="in">Pages</div>
-                  </a>
+                    <div className="in">History</div>
+                  </Link>
                 </li>
                 <li>
-                  <a href="app-components.html" className="item">
+                  <Link to="/history/bonus" className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="apps-outline"></ion-icon>
                     </div>
-                    <div className="in">Components</div>
-                  </a>
-                </li>
-                <li>
-                  <a href="app-cards.html" className="item">
-                    <div className="icon-box bg-primary">
-                      <ion-icon name="card-outline"></ion-icon>
-                    </div>
-                    <div className="in">My Cards</div>
-                  </a>
+                    <div className="in">History Bonus</div>
+                  </Link>
                 </li>
               </ul>
               <div className="listview-title mt-1">Others</div>
               <ul className="listview flush transparent no-line image-listview">
                 <li>
-                  <a href="app-settings.html" className="item">
+                  <Link to="/setting" className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="settings-outline"></ion-icon>
                     </div>
                     <div className="in">Settings</div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="component-messages.html" className="item">
+                  <a href="#" className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="chatbubble-outline"></ion-icon>
                     </div>
@@ -131,12 +82,12 @@ export default function SideBarComponent() {
                   </a>
                 </li>
                 <li>
-                  <a href="app-login.html" className="item">
+                  <button onClick={handlerLogout} className="item">
                     <div className="icon-box bg-primary">
                       <ion-icon name="log-out-outline"></ion-icon>
                     </div>
                     <div className="in">Log out</div>
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

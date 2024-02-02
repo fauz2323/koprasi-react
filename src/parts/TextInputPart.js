@@ -9,9 +9,9 @@ export default function TextInputPart({
   autoComplete,
 }) {
   return (
-    <div className="sm:col-span-4 mt-8">
+    <div className="sm:col-span-4 mt-1">
       <label className="block text-sm font-medium leading-6 text-gray-900">
-        {name}
+        {name.replace("_", " ")}
       </label>
       <div className="mt-2">
         <input

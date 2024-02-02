@@ -8,12 +8,12 @@ export default function HeaderMenuHomePart() {
         <div className="wallet-card">
           <div className="wallet-footer">
             <div className="item">
-              <a href="#">
+              <Link to={"/withdraw"}>
                 <div className="icon-wrapper bg-danger">
                   <ion-icon name="arrow-down-outline"></ion-icon>
                 </div>
                 <strong>Withdraw</strong>
-              </a>
+              </Link>
             </div>
             <div className="item">
               <Link to={"/setoran"}>
@@ -24,12 +24,12 @@ export default function HeaderMenuHomePart() {
               </Link>
             </div>
             <div className="item">
-              <a href="app-cards.html">
+              <Link to={"/transaction/va/asdasdasd"}>
                 <div className="icon-wrapper bg-success">
                   <ion-icon name="card-outline"></ion-icon>
                 </div>
                 <strong>Setoran VIP</strong>
-              </a>
+              </Link>
             </div>
             <div className="item">
               <a href="#">

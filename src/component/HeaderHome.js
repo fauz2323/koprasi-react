@@ -1,5 +1,7 @@
 import React from "react";
 import SideBarComponent from "./SideBarComponent";
+import { icon } from "../assets/images";
+import { Link } from "react-router-dom";
 
 export default function HeaderHome() {
   return (
@@ -16,21 +18,19 @@ export default function HeaderHome() {
           </a>
         </div>
         <div className="pageTitle">
-          <img src="assets/img/logo.png" alt="logo" className="logo" />
+          <img src={icon} alt="logo" className="logo" />
         </div>
         <div className="right">
-          <a href="app-notifications.html" className="headerButton">
+          <a href="#" className="headerButton">
             <ion-icon className="icon" name="notifications-outline"></ion-icon>
-            <span className="badge badge-danger">4</span>
           </a>
-          <a href="app-settings.html" className="headerButton">
+          <Link to="/setting" className="headerButton">
             <img
               src="assets/img/sample/avatar/avatar1.jpg"
-              alt="image"
+              alt="images"
               className="imaged w32"
             />
-            <span className="badge badge-danger">6</span>
-          </a>
+          </Link>
         </div>
       </div>
       <SideBarComponent />
